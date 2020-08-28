@@ -14,7 +14,7 @@ $app = AppFactory::create();
 /* Twig */
 $cache = strtolower($_ENV['TWIG_CACHE'])!=='false' ? $_ENV['TWIG_CACHE'] : FALSE;
 
-$loader = new \Twig\Loader\FilesystemLoader(CURRENT_PATH .  'templates');
+$loader = new \Twig\Loader\FilesystemLoader(CURRENT_PATH .  'src/templates');
 $twig = new \Twig\Environment($loader, [
     'cache' => $cache,
     'debug' => $_ENV['TWIG_DEBUG']
