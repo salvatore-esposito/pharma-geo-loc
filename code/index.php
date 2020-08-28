@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="/dist/app.css">
-  </head>
-  <body>
-    test
-  </body>
-  <script src="/dist/app.js"></script>
-</html>
+<?php
+define('CURRENT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+require_once CURRENT_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+require_once CURRENT_PATH . 'config' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+require_once CURRENT_PATH . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
+
+$app->run();
