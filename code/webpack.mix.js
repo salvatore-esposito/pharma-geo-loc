@@ -15,7 +15,7 @@ mix.webpackConfig({ devtool: "inline-source-map" });
 mix.browserSync({
   proxy : "http://localhost:8080",
   open: false,
-  files: ['./src/**/*', './routes/*'],
+  files: ['./src/**/*', './app', './routes/*'],
   watchOptions: {
     usePolling: true,
    awaitWriteFinish: true
