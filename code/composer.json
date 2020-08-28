@@ -9,6 +9,7 @@
     "type": "project",
     "license": "GPLv3",
     "require": {
+        "bryanjhv/slim-session": "^4.1",
         "guzzlehttp/guzzle": "^7.0",
         "laminas/laminas-json-server": "^3.2",
         "mjaschen/phpgeo": "^3.1",
