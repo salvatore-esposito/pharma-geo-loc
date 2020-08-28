@@ -1,0 +1,24 @@
+{
+    "name": "salvio/pharma-geo-loc",
+    "description": "App for geolocalize pharmacies within a prefixed distance",
+    "authors": [
+        {
+            "name": "Salvatore Esposito",
+            "email": "nadermansalvatore.esposito2v@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "type": "project",
+    "license": "GPL3",
+    "require": {
+
+    },
+    "require-dev": {
+
+    },
+    "autoload": {
+        "psr-4": {
+            "GeoPharms\\": "app/"
+        }
+    }
+}

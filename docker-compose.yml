@@ -1,0 +1,62 @@
+version: '3.3'
+services:
+
+  #PHP Service
+  app:
+    build:
+      context: .
+      dockerfile: .conf/php/Dockerfile
+    image: salvio/pharma-geo-loc
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html
+    ports:
+      - "3000:3000"
+      - "3001:3001"
+      - "8080:8080"
+    volumes:
+      - ./code:/var/www/html
+      - ./.conf/php/php.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./.conf/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    command: php -S 0.0.0.0:8080 -t /var/www/html
+    networks:
+      - pharma-geo-loc-network
+
+  #REDIS Service
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "6379:6379"
+    environment:
+      SERVICE_TAGS: dev
+      SERVICE_NAME: redis
+    volumes:
+      - ./.conf/redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - pharma-geo-loc-network
+
+#phpunit service
+  phpunit:
+    image: phpunit/phpunit
+    tty: true
+    working_dir: /code
+    volumes:
+      - "./code:/code"
+
+#composer service
+  composer:
+    image: composer:latest
+    tty: true
+    working_dir: /code
+    volumes:
+      - "./code:/code"
+
+#Docker Networks
+networks:
+  pharma-geo-loc-network:
+    driver: bridge
