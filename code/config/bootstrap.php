@@ -1,4 +1,6 @@
 <?php
+require_once CURRENT_PATH . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+
 use Symfony\Component\Dotenv\Dotenv;
 use Slim\Factory\AppFactory;
 
@@ -19,4 +21,11 @@ $twig = new \Twig\Environment($loader, [
     'cache' => $cache,
     'debug' => $_ENV['TWIG_DEBUG']
 ]);
+$function = new \Twig\TwigFunction('assets_path', function () {
+    return $_ENV['ASSETS_PATH'];
+});
+$twig->addFunction($function);
+
+/* set container objects */
 $container->set('view' , $twig);
+$container->set('assets_path', $_ENV['ASSETS_PATH']);
