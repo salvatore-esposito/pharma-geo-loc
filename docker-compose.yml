@@ -25,7 +25,7 @@ services:
     networks:
       - pharma-geo-loc-network
 
-  #REDIS Service
+  #Redis Service
   redis:
     image: redis:latest
     restart: unless-stopped
@@ -40,7 +40,7 @@ services:
     networks:
       - pharma-geo-loc-network
 
-#phpunit service
+  #phpunit service
   phpunit:
     image: phpunit/phpunit
     tty: true
@@ -48,11 +48,12 @@ services:
     volumes:
       - "./code:/code"
 
-#composer service
+  #composer service
   composer:
     image: composer:latest
     tty: true
     working_dir: /code
+    user: 1000:1000
     volumes:
       - "./code:/code"
 
