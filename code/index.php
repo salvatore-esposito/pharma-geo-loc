@@ -1,7 +1,5 @@
 <?php
-define('CURRENT_PATH', __DIR__ . DIRECTORY_SEPARATOR);
-
-require_once CURRENT_PATH . 'config' . DIRECTORY_SEPARATOR . 'bootstrap.php';
-require_once CURRENT_PATH . 'routes' . DIRECTORY_SEPARATOR . 'web.php';
+require_once 'config/bootstrap.php';
+require_once 'routes/web.php';
 
 $app->run();

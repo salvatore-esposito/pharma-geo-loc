@@ -5,7 +5,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 $app->get('/', function (Request $request, Response $response, $args) {
   $response->getBody()->write(
     $this->get('view')->render('index.twig' , [
-      'test' => 'ok!',
+      'test' => $_SERVER['REMOTE_ADDR'],
     ])
   );
   return $response;
