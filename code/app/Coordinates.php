@@ -5,7 +5,7 @@ namespace GeoPharmsLoc;
 
 class Coordinates
 {
-  protected $cords;
+  protected $coords;
 
   public function __construct(array $coords)
   {
@@ -15,12 +15,12 @@ class Coordinates
 
   public function setLong(float $long)
   {
-    $this->cords['lon'] = $long;
+    $this->coords['lon'] = $long;
   }
 
   public function setLat(float $lat)
   {
-    $this->cords['lat'] = $lat;
+    $this->coords['lat'] = $lat;
   }
 
   public function getCords() : array

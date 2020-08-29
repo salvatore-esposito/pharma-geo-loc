@@ -44,7 +44,7 @@ class Geolocalizator
 
   public function getLocalizationArray() : array
   {
-    $response = $this->client->request('GET', self::IP_API_SERVICE . '/' . $this->getUserIp());
+    $response = $this->client->request('GET', self::IP_API_SERVICE . '/' . $this->getIp());
     if($response->getStatusCode() !== 200)
     {
       throw new \Exception();
