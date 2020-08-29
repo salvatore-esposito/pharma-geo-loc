@@ -9,11 +9,11 @@ class Coordinates
 
   public function __construct(array $coords)
   {
-    $this->setLong($coords['lon']);
+    $this->setLon($coords['lon']);
     $this->setLat($coords['lat']);
   }
 
-  public function setLong(float $long)
+  public function setLon(float $long)
   {
     $this->coords['lon'] = $long;
   }

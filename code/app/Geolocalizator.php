@@ -10,8 +10,6 @@ class Geolocalizator
   protected $ip;
   protected $IpAddressHeader;
   protected $coordinates;
-  protected const IP_API_SERVICE = 'http://ip-api.com/json/';
-  protected $client;
 
   public function __construct(string $ip = '')
   {
@@ -19,7 +17,6 @@ class Geolocalizator
 
     $this->setAddressHeader($container->get( 'app' )['REMOTE_ADDR_HEADER']);
     $this->setIp($ip);
-    $this->client = new Client();
   }
 
   public function setIp(string $ip) : void
@@ -44,18 +41,16 @@ class Geolocalizator
 
   public function getLocalizationArray() : array
   {
-    $response = $this->client->request('GET', self::IP_API_SERVICE . '/' . $this->getIp());
-    if($response->getStatusCode() !== 200)
-    {
-      throw new \Exception();
-    }
-    return json_decode($response->getBody()->read(1024), true);
+    return IpApiCom::getPayload([
+            'ip' => $this->getIp()
+           ]);
   }
 
   public function getCoordinates() : Coordinates
   {
+    //need to lauch an exception if there's a malformed json
     $response = $this->getLocalizationArray();
-    //To Do ckeck if they're already in redis, otherwise make call and cache them
+    //todo ckeck if they're already in redis, otherwise make call and cache them
     $this->coordinates = new Coordinates([
       'lat' => $response['lat'],
       'lon' => $response['lon']
