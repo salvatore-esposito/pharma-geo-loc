@@ -25,7 +25,11 @@
     },
     "autoload": {
         "psr-4": {
-            "GeoPharmsLoc\\": "app/",
+            "GeoPharmsLoc\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "GeoPharmLocTest\\": "test/"
         }
     }
