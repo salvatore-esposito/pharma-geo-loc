@@ -8,7 +8,7 @@ class Pharmacy
   private $name;
   private $coords;
 
-  public function __construct(string $name, Coordinates $coords)
+  public function __construct(string $name, GeoCoordinate $coords)
   {
     $this->name = $name;
     $this->coords = $coords;

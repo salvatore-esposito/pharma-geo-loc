@@ -7,7 +7,7 @@ class Geolocalizator
 {
   protected $ip;
   protected $IpAddressHeader;
-  protected $coordinates;
+  protected $GeoCoordinate;
 
   public function __construct(string $ip = '')
   {
@@ -44,15 +44,15 @@ class Geolocalizator
            ]);
   }
 
-  public function getCoordinates() : Coordinates
+  public function getGeoCoordinate() : GeoCoordinate
   {
     //need to lauch an exception if there's a malformed json
     $response = $this->getLocalizationArray();
     //todo ckeck if they're already in redis, otherwise make call and cache them
-    $this->coordinates = new Coordinates([
+    $this->GeoCoordinate = new GeoCoordinate([
       'lat' => $response['lat'],
       'lon' => $response['lon']
     ]);
-    return $this->coordinates;
+    return $this->GeoCoordinate;
   }
 }

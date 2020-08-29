@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use GeoPharmsLoc\Geolocalizator;
-use GeoPharmsLoc\Coordinates;
+use GeoPharmsLoc\GeoCoordinate;
 
 class GeolocalizatorTest extends TestCase
 {
@@ -40,10 +40,10 @@ class GeolocalizatorTest extends TestCase
 
     public function testCoords()
     {
-      $expectedCoord = new Coordinates(['lat' => 40.9544, 'lon' => 14.267]);
+      $expectedCoord = new GeoCoordinate(['lat' => 40.9544, 'lon' => 14.267]);
       $this->assertEquals(
         $expectedCoord,
-        $this->geolocalizator->getCoordinates()
+        $this->geolocalizator->getGeoCoordinate()
       );
     }
 

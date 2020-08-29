@@ -3,7 +3,9 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-class Coordinates
+use Location\Coordinate;
+
+class GeoCoordinate
 {
   protected $coords;
 
@@ -26,5 +28,10 @@ class Coordinates
   public function getCords() : array
   {
     return $this->coords;
+  }
+
+  public function toCoordinate(): Coordinate
+  {
+      return new Coordinate($this->coords['lat'], $this->coords['lon']);
   }
 }
