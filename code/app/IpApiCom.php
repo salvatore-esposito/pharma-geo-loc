@@ -11,7 +11,7 @@ class IpApiCom extends AbstractJSONService
   {
     if(!array_key_exists('ip', $params))
     {
-      //Need Impment an Execprion
+      //Need Impment an Execption
       throw new \Exception;
     }
 

@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-use GuzzleHttp\Client;
-
 class Geolocalizator
 {
   protected $ip;
