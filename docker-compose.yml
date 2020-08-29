@@ -42,7 +42,7 @@ services:
 
   #phpunit service
   phpunit:
-    image: phpunit/phpunit
+    image: phpunit/phpunit:6.5.3
     tty: true
     working_dir: /code
     volumes:
