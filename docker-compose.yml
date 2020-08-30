@@ -40,14 +40,6 @@ services:
     networks:
       - pharma-geo-loc-network
 
-  #phpunit service
-  phpunit:
-    image: phpunit/phpunit:6.5.3
-    tty: true
-    working_dir: /code
-    volumes:
-      - "./code:/code"
-
   #composer service
   composer:
     image: composer:latest

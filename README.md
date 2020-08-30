@@ -6,7 +6,7 @@
 * cd your-directory
 * git checkout develop
 * docker-compose run --rm composer install
-* docker-compose up -d app --build
+* docker-compose up -d --build app
 * go to http://localhost:8080
 
 #### To enabling development mode:
