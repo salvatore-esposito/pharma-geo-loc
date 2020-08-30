@@ -3,12 +3,6 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
 $app->get('/', function (Request $request, Response $response, $args) {
-  new GeoPharmsLoc\JSONRPCServer();
-  $request = new Laminas\Json\Server\Request;
-  $request->addParam('3', 'mystring');
-  print_r($request->getParam('mystring'));
-  exit;
-  $coords = (new GeoPharmsLoc\Geolocalizator('151.70.202.83'))->getGeoCoordinate();
   $response->getBody()->write(
     $this->get('view')->render('index.twig' , [
       'lat' => $coords->getCords()['lat'],

@@ -22,10 +22,13 @@ class SearchNearestPharmacyTest extends TestCase
       $limit = 2;
       $geolocalizeByIp = new GeolocalizeByIp(require('currentip.php'));
       $geolocalizator = new Geolocalizator($geolocalizeByIp);
-      $userCoord = $geolocalizator->getGeoCoordinate();
+      $userCoord = $geolocalizator->getGeoCoordinate()->getCoords();
       $params = [
         'range' => $range,
-        'currentLocation' => $userCoord,
+        'currentLocation' => [
+                'latitude' => $userCoord['lat'],
+                'longitude' => $userCoord['lon']
+              ],
         'limit' => $limit
       ];
       $pharmaciesWithinRange = $this->searchNearestPharmacy->operation($params);

@@ -3,9 +3,6 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-
-use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 
 // note that this class has two responsibilities: make Pharmacies objects and put them
@@ -45,7 +42,7 @@ class PharmacyFactory
                                                  'lat' => $pharmacy['geometry']['coordinates'][1]])
                                                );
         }
-        return $pharmacies;
+        return $pharmacies; //can be cached too
       }
     }
 }

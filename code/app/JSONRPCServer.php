@@ -3,19 +3,52 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-use Laminas\Json\Server\Server as Server;
-use Laminas\Json\Server\Request as Request;
-use Laminas\Json\Server\Response as Response;
-use Laminas\Json\Server\Error as Error;
-use GeoPharmsLoc\Methods\SearchNearestPharmacy as SearchNearestPharmacy;
-
+use Symfony\Component\Filesystem\Filesystem;
+use GeoPharmsLoc\MethodInterface;
+use GeoPharmsLoc\GeoCoordinate;
 // note that this class has two responsibilities: make Pharmacies objects and put them
 // in an array repository
 class JSONRPCServer
 {
+  public $payload;
+  private $filesystem;
+
   public function __construct() {
-    //create and configure a laminas server with a factory
-    //You have to creare a RequestAdapter
-    SearchNearestPharmacy::operation();
+    $this->filesystem = new Filesystem;
+  }
+
+  public function setRequest(string $paramsString) : array
+  {
+    return json_decode($paramsString, TRUE);
+  }
+
+
+  public function performOperation()
+  {
+    if(!$this->filesystem->exists(sprintf("./app/methods/%s.php", $this->payload['method'])))
+     {
+       throw new \Exception();
+     }
+
+     $method = "GeoPharmsLoc\\Methods\\" . $this->payload['method'];
+
+     $result = forward_static_call(
+                      array($method, 'operation'),
+                      $this->payload['params']
+                    );
+     return $result;
+  }
+
+  public function getResponse($resultName)
+  {
+    $response  = [
+      '"jsonrpc": "2.0"',
+      'id' => $this->payload['id'],
+      'result' => [
+        $resultName => $this->performOperation()
+      ]
+    ];
+
+    return json_encode($response);
   }
 }

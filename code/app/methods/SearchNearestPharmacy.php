@@ -11,7 +11,7 @@ use GeoPharmsLoc\GeoCoordinate as GeoCoordinate;
 
 final class SearchNearestPharmacy implements MethodInterface
 {
-  public function operation( array $params = [] ) : array
+  public static function operation( array $params = [] ) : array
   {
     if(!(array_key_exists('range', $params) &&
          array_key_exists('currentLocation', $params) &&
@@ -23,10 +23,10 @@ final class SearchNearestPharmacy implements MethodInterface
 
     extract($params);
 
-    if(!($currentLocation instanceof GeoCoordinate ))
-    {
-      throw new \InvalidArgumentException('currentLocation must be of GeoCoordinate type!');
-    }
+    $currentLocation = new GeoCoordinate([
+        'lat' => $currentLocation['latitude'],
+        'lon' => $currentLocation['longitude']
+      ]);
 
     $pharmacies = PharmacyFactory::getPharmsArray();
 
@@ -39,10 +39,17 @@ final class SearchNearestPharmacy implements MethodInterface
                                                              $pharmacy->getGeoCoords());
       if($distance <= $range)
         {
-          $pharmacy->distance = $distance;
-          $pharmaciesWithinRange[] = $pharmacy;
+          $pharmaciesWithinRange[] = [
+            'name' => $pharmacy->getName(),
+            'distance' => $distance,
+            'location' => [
+              'latitude' => $pharmacy->getCoords()['lat'],
+              'longitude' => $pharmacy->getCoords()['lon']
+            ]];
         }
     }
+
+
     return $pharmaciesWithinRange;
   }
 }
