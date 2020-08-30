@@ -4,8 +4,7 @@ declare(strict_types=1);
 namespace GeoPharmsLoc;
 
 use Symfony\Component\Filesystem\Filesystem;
-use GeoPharmsLoc\MethodInterface;
-use GeoPharmsLoc\GeoCoordinate;
+
 // note that this class has two responsibilities: make Pharmacies objects and put them
 // in an array repository
 class JSONRPCServer
@@ -23,7 +22,7 @@ class JSONRPCServer
   }
 
 
-  public function performOperation()
+  public function performOperation() : array
   {
     if(!$this->filesystem->exists(sprintf("./app/methods/%s.php", $this->payload['method'])))
      {
@@ -39,7 +38,7 @@ class JSONRPCServer
      return $result;
   }
 
-  public function getResponse($resultName)
+  public function getResponse(string $resultName) : string
   {
     $response  = [
       '"jsonrpc": "2.0"',
