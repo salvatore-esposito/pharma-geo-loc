@@ -25,7 +25,7 @@ class GeoCoordinate
     $this->coords['lat'] = $lat;
   }
 
-  public function getCords() : array
+  public function getCoords() : array
   {
     return $this->coords;
   }

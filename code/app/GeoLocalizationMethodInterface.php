@@ -7,5 +7,5 @@ namespace GeoPharmsLoc;
 //methods
 interface GeolocalizationMethodInterface
 {
-  public function getGeoCoordinates() : GeoCoordinate;
+  public function performGetGeoCoordinate() : GeoCoordinate;
 }

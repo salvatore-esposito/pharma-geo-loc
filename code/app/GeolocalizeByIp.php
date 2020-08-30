@@ -39,13 +39,13 @@ class GeolocalizeByIp implements GeolocalizationMethodInterface
     return $_SERVER[$this->IpAddressHeader];
   }
 
-  public function getGeoCoordinates() : GeoCoordinate
+  public function performGetGeoCoordinate() : GeoCoordinate
   {
     {
       //need to lauch an exception if there's a malformed json
       $response = IpApiCom::getPayload([
-              'ip' => $this->getIp()
-             ]);;
+                    'ip' => $this->getIp()
+                  ]);;
       //todo ckeck if they're already in redis, otherwise make call and cache them
       $this->GeoCoordinate = new GeoCoordinate([
         'lat' => $response['lat'],

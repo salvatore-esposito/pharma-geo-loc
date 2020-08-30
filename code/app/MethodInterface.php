@@ -6,5 +6,5 @@ namespace GeoPharmsLoc;
 
 interface MethodInterface
 {
-  public static function operation() : void;
+  public function operation(array $params) : array;
 }

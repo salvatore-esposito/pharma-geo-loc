@@ -5,27 +5,30 @@ namespace GeoPharmsLoc\Methods;
 
 use GeoPharmsLoc\MethodInterface as MethodInterface;
 use GeoPharmsLoc\Geolocalizator as Geolocalizator;
-use GeoPharmsLoc\Geolocalizator as GeolocalizeByIp;
 use GeoPharmsLoc\PharmacyFactory as PharmacyFactory;
 use GeoPharmsLoc\EarthDistanceCalculator as EarthDistanceCalculator;
 
 final class SearchNearestPharmacy implements MethodInterface
 {
-  public static function operation() : void
+  public function operation( array $params = [] ) : array
   {
-    $geolocalizeMethod = new GeolocalizeByIp('151.70.202.83');
-    $geolocalizator = new Geolocalizator($geolocalizeMethod);
-    $userCoords = $geolocalizator->getGeoCoordinate();
+    extract($params);
+
     $pharmacies = PharmacyFactory::getPharmsArray();
 
-    $distances = [];
-
+    $pharmaciesWithinRange = [];
     foreach ($pharmacies as $pharmacy) {
-      $distance[] = EarthDistanceCalculator::calculateDistance($userCoords,
-                                                 $pharmacy->getGeoCoords());
 
-      if($distance < 100000) $distances[] = $distance;
+      if(count($pharmaciesWithinRange) === $limit) break;
+
+      $distance = EarthDistanceCalculator::calculateDistance($currentLocation,
+                                                             $pharmacy->getGeoCoords());
+      if($distance <= $range)
+        {
+          $pharmacy->distance = $distance;
+          $pharmaciesWithinRange[] = $pharmacy;
+        }
     }
-    print_r($distances);
+    return $pharmaciesWithinRange;
   }
 }

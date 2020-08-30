@@ -7,7 +7,6 @@ class Geolocalizator
 {
   protected $method;
 
-
   public function __construct(GeolocalizationMethodInterface $method) //method ByIp
   {
     $this->method = $method;
@@ -15,6 +14,6 @@ class Geolocalizator
 
   public function getGeoCoordinate() : GeoCoordinate
   {
-    return $this->method->getGeoCoordinates();
+    return $this->method->performGetGeoCoordinate();
   }
 }
