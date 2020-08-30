@@ -3,15 +3,13 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-//Must be rewritten and you have to create an interface to create different localization
-//methods
 class GeolocalizeByIp implements GeolocalizationMethodInterface
 {
   protected $ip;
   protected $IpAddressHeader;
-  protected $GeoCoordinate;
+  protected $geoCoordinate;
 
-  public function __construct(string $ip) //method ByIp
+  public function __construct(string $ip)
   {
     global $container;
 
@@ -47,12 +45,12 @@ class GeolocalizeByIp implements GeolocalizationMethodInterface
                     'ip' => $this->getIp()
                   ]);;
       //todo ckeck if they're already in redis, otherwise make call and cache them
-      $this->GeoCoordinate = new GeoCoordinate([
+      $this->geoCoordinate = new GeoCoordinate([
         'lat' => $response['lat'],
         'lon' => $response['lon']
       ]);
 
-      return $this->GeoCoordinate;
+      return $this->geoCoordinate;
     }
   }
 }
