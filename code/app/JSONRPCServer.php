@@ -16,13 +16,13 @@ class JSONRPCServer
     $this->filesystem = new Filesystem;
   }
 
-  public function setRequest(string $paramsString) : array
+  public function setRequest(string $paramsString) : void
   {
-    return json_decode($paramsString, TRUE);
+    $this->payload = json_decode($paramsString, TRUE);
   }
 
 
-  public function performOperation() : array
+  private function performOperation() : array
   {
     if(!$this->filesystem->exists(sprintf("./app/methods/%s.php", $this->payload['method'])))
      {
@@ -40,11 +40,20 @@ class JSONRPCServer
 
   public function getResponse(string $resultName) : string
   {
+
+    try {
+      $result = $this->performOperation();
+    }
+    catch (\Exception $e){
+      $resultName = 'Error:';
+      $result = [ 'message' => 'method not found', 'code' => -32601 ];
+    }
+
     $response  = [
-      '"jsonrpc": "2.0"',
+      'jsonrpc' => '2.0',
       'id' => $this->payload['id'],
       'result' => [
-        $resultName => $this->performOperation()
+        $resultName => $result
       ]
     ];
 

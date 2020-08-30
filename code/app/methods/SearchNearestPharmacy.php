@@ -20,7 +20,7 @@ final class SearchNearestPharmacy implements MethodInterface
     {
       throw new \InvalidArgumentException('$params must have range,currentLocation and limit keys!');
     }
-
+    
     extract($params);
 
     $currentLocation = new GeoCoordinate([
@@ -33,22 +33,22 @@ final class SearchNearestPharmacy implements MethodInterface
     $pharmaciesWithinRange = [];
     foreach ($pharmacies as $pharmacy) {
 
-      if(count($pharmaciesWithinRange) === $limit) break;
+    if(count($pharmaciesWithinRange) === $limit) break;
 
-      $distance = EarthDistanceCalculator::calculateDistance($currentLocation,
+
+    $distance = EarthDistanceCalculator::calculateDistance($currentLocation,
                                                              $pharmacy->getGeoCoords());
-      if($distance <= $range)
-        {
-          $pharmaciesWithinRange[] = [
-            'name' => $pharmacy->getName(),
-            'distance' => $distance,
-            'location' => [
-              'latitude' => $pharmacy->getCoords()['lat'],
-              'longitude' => $pharmacy->getCoords()['lon']
-            ]];
-        }
+    if($distance <= $range)
+      {
+        $pharmaciesWithinRange[] = [
+          'name' => $pharmacy->getName(),
+          'distance' => $distance,
+          'location' => [
+            'latitude' => $pharmacy->getCoords()['lat'],
+            'longitude' => $pharmacy->getCoords()['lon']
+          ]];
+      }
     }
-
 
     return $pharmaciesWithinRange;
   }
