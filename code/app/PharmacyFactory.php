@@ -7,7 +7,7 @@ namespace GeoPharmsLoc;
 // in an array repository
 class PharmacyFactory
 {
-    public static function createPharmacyObject($name, $coords) : array
+    public static function createPharmacyObject(string $name, GeoCoordinate $coords) : Pharmacy
     {
       return new Pharmacy( $name, $coords );
     }
@@ -21,16 +21,15 @@ class PharmacyFactory
         //Put this as an arguments
         $jsonPayload = CampaniaPharmacies::getPayload();
 
-        $coords = new GeoCoordinate([ 'lon' => 0, 'lat' => 0]);
-
+        echo '<pre>';
         foreach ($jsonPayload as $pharmacy) {
-
-          $coords->setLon($pharmacy['geometry']['GeoCoordinate'][0]);
-          $coords->setLat($pharmacy['geometry']['GeoCoordinate'][1]);
 
           $pharmacies[] = self::createPharmacyObject(
                                                $pharmacy['properties']['Descrizione'],
-                                               $coords);
+                                               new GeoCoordinate([
+                                                 'lon' => $pharmacy['geometry']['coordinates'][0],
+                                                 'lat' => $pharmacy['geometry']['coordinates'][1]])
+                                               );
         }
         return $pharmacies;
       }

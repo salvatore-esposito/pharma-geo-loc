@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-class IpApiCom extends AbstractJSONService
+final class IpApiCom extends AbstractJSONService
 {
   private const URL='http://ip-api.com/json/';
 

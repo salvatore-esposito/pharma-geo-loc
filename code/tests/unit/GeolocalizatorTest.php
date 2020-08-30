@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use PHPUnit\Framework\TestCase;
 use GeoPharmsLoc\Geolocalizator;
+use GeoPharmsLoc\GeolocalizeByIp;
 use GeoPharmsLoc\GeoCoordinate;
 
 class GeolocalizatorTest extends TestCase
@@ -13,29 +14,8 @@ class GeolocalizatorTest extends TestCase
     public function setUp() : void
     {
       $_SERVER['REMOTE_ADDR'] = $this->ipTester;
-      $this->geolocalizator = new Geolocalizator();
-    }
-
-    public function testSetIp()
-    {
-        $this->assertEquals(
-          $this->ipTester,
-          $this->geolocalizator->getIp(),
-          'Ips don\'t match'
-        );
-    }
-
-    public function testGetUserIp()
-    {
-      $reflectedGeolocalizator = new ReflectionMethod( $this->geolocalizator , 'getUserIp' );
-      $reflectedGeolocalizator ->setAccessible(true);
-
-      $remoteAddres=$this->ipTester;
-      $this->assertEquals(
-        $remoteAddres,
-        $reflectedGeolocalizator ->invoke( $this->geolocalizator),
-        'The User ip doesn\'t match the expected one'
-      );
+      $this->geolocalizeByIp = new GeolocalizeByIp($this->ipTester);
+      $this->geolocalizator = new Geolocalizator($this->geolocalizeByIp);
     }
 
     public function testCoords()

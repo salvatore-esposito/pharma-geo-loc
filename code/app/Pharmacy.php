@@ -19,6 +19,11 @@ class Pharmacy
     return $this->name;
   }
 
+  public function getGeoCoords() : GeoCoordinate
+  {
+    return $this->coords;
+  }
+
   public function getCoords() : array
   {
     return $this->coords->getCoords();

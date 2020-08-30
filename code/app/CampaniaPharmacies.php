@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace GeoPharmsLoc;
 
-class CampaniaPharmacies extends AbstractJSONService
+final class CampaniaPharmacies extends AbstractJSONService
 {
   private const URL='https://dati.regione.campania.it/catalogo/resources/Elenco-Farmacie.geojson';
 
