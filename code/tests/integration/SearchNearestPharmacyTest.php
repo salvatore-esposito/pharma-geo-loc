@@ -20,7 +20,7 @@ class SearchNearestPharmacyTest extends TestCase
       $isWithinRange = FALSE;
       $range = 1000;
       $limit = 2;
-      $geolocalizeByIp = new GeolocalizeByIp('151.70.202.83');
+      $geolocalizeByIp = new GeolocalizeByIp(require('currentip.php'));
       $geolocalizator = new Geolocalizator($geolocalizeByIp);
       $userCoord = $geolocalizator->getGeoCoordinate();
       $params = [

@@ -20,7 +20,7 @@ class PharmacyFactory
 
         //Put this as an arguments
         $jsonPayload = CampaniaPharmacies::getPayload();
-        
+
         foreach ($jsonPayload as $pharmacy) {
 
           $pharmacies[] = self::createPharmacyObject(

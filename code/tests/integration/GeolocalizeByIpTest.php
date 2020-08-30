@@ -8,10 +8,12 @@ use GeoPharmsLoc\GeoCoordinate;
 class GeolocalizeByIpTest extends TestCase
 {
   private $geolocalizator;
-  private $ipTester = '151.70.202.83';
+  private $ipTester;
 
     public function setUp() : void
     {
+      $this->ipTester  = require('currentip.php');
+
       $_SERVER['REMOTE_ADDR'] = $this->ipTester;
       $this->geolocalizeByIp = new GeolocalizeByIp($this->ipTester);
     }
