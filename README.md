@@ -4,7 +4,6 @@
 #### Follow these steps to run this app:
 * git clone https://github.com/salvatore-esposito/pharma-geo-loc.git your-directory
 * cd your-directory
-* git checkout develop
 * docker-compose run --rm composer install
 * docker-compose up -d --build app
 * go to http://localhost:8080
