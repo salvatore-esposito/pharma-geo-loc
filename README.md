@@ -1,5 +1,5 @@
 # pharma-geo-loc
-### An application that finds all pharmacies at predetermined distance by an user.
+### An application that finds all pharmacies at predetermined distance by a user.
 
 #### Follow these steps to run this app:
 * git clone https://github.com/salvatore-esposito/pharma-geo-loc.git your-directory
