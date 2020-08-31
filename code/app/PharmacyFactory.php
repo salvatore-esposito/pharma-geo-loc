@@ -39,8 +39,9 @@ class PharmacyFactory
                                                $pharmacy['properties']['Descrizione'],
                                                new GeoCoordinate([
                                                  'lon' => $pharmacy['geometry']['coordinates'][0],
-                                                 'lat' => $pharmacy['geometry']['coordinates'][1]])
-                                               );
+                                                 'lat' => $pharmacy['geometry']['coordinates'][1]
+                                               ])
+                                             );
         }
         return $pharmacies; //can be cached too
       }

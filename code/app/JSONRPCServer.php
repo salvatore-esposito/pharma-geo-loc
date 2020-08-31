@@ -32,8 +32,7 @@ class JSONRPCServer
      $method = "GeoPharmsLoc\\Methods\\" . $this->payload['method'];
 
      $result = forward_static_call(
-                      array($method, 'operation'),
-                      $this->payload['params']
+                      array($method, 'operation'), $this->payload['params']
                     );
      return $result;
   }

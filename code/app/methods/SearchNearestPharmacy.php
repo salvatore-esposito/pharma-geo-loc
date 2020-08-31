@@ -20,7 +20,7 @@ final class SearchNearestPharmacy implements MethodInterface
     {
       throw new \InvalidArgumentException('$params must have range,currentLocation and limit keys!');
     }
-    
+
     extract($params);
 
     $currentLocation = new GeoCoordinate([
@@ -49,6 +49,13 @@ final class SearchNearestPharmacy implements MethodInterface
           ]];
       }
     }
+
+    usort($pharmaciesWithinRange, function($element1, $element2){
+      if ($element1['distance'] == $element2['distance']) {
+        return 0;
+      }
+      return ($element1['distance'] < $element2['distance']) ? -1 : 1;
+    });
 
     return $pharmaciesWithinRange;
   }
