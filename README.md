@@ -8,7 +8,7 @@
 * docker-compose up -d --build app
 * go to http://localhost:8080
 
-#### To enabling development mode:
+#### To enable development mode:
 * docker-compose exec app yarn install
 * docker-compose exec app yarn run watch-poll
 * Go to http://localhost:3000
