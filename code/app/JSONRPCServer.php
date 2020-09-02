@@ -24,7 +24,7 @@ class JSONRPCServer
 
   private function performOperation() : array
   {
-    if(!$this->filesystem->exists(sprintf("./app/methods/%s.php", $this->payload['method'])))
+    if(!$this->filesystem->exists(sprintf("./app/Methods/%s.php", $this->payload['method'])))
      {
        throw new \Exception();
      }
@@ -34,6 +34,7 @@ class JSONRPCServer
      $result = forward_static_call(
                       array($method, 'operation'), $this->payload['params']
                     );
+
      return $result;
   }
 
